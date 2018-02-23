@@ -23,15 +23,16 @@ class TestBase:
 
     def _check_sample(self, msg):
         # Inspect a mailbox.Message representation of the sample message
-        self.assertIsInstance(msg, email.message.Message)
+        self.assertIsInstance(msg, email.message.EmailMessage)
         self.assertIsInstance(msg, mailbox.Message)
         for key, value in _sample_headers.items():
+            print("key: %s\nvalue: %s\nmessage value: %s" % (key, value, msg.get_all(key)))
             self.assertIn(value, msg.get_all(key))
         self.assertTrue(msg.is_multipart())
         self.assertEqual(len(msg.get_payload()), len(_sample_payloads))
         for i, payload in enumerate(_sample_payloads):
             part = msg.get_payload(i)
-            self.assertIsInstance(part, email.message.Message)
+            self.assertIsInstance(part, email.message.EmailMessage)
             self.assertNotIsInstance(part, mailbox.Message)
             self.assertEqual(part.get_payload(), payload)
 
@@ -2247,8 +2248,7 @@ _sample_headers = {
     "Received":"""from andy.gregorykjohnson.com (andy.gregorykjohnson.com [64.32.235.228])
         by sundance.gregorykjohnson.com (Postfix) with ESMTP id 5B056316746
         for <gkj@gregorykjohnson.com>; Wed, 13 Jul 2005 17:23:11 -0400 (EDT)""",
-    "Received":"""by andy.gregorykjohnson.com (Postfix, from userid 1000)
-        id 490CD9DD17; Wed, 13 Jul 2005 17:23:11 -0400 (EDT)""",
+    "Received":"""by andy.gregorykjohnson.com (Postfix, from userid 1000)        id 490CD9DD17; Wed, 13 Jul 2005 17:23:11 -0400 (EDT)""",
     "Date":"Wed, 13 Jul 2005 17:23:11 -0400",
     "From":""""Gregory K. Johnson" <gkj@gregorykjohnson.com>""",
     "To":"gkj@gregorykjohnson.com",

@@ -15,6 +15,7 @@ import copy
 import warnings
 import email
 import email.message
+import email.policy
 import email.generator
 import io
 import contextlib
@@ -1483,25 +1484,31 @@ class Babyl(_singlefileMailbox):
         return (start, stop)
 
 
-class Message(email.message.Message):
+class Message(email.message.EmailMessage):
     """Message with mailbox-format-specific properties."""
 
     def __init__(self, message=None):
         """Initialize a Message instance."""
-        if isinstance(message, email.message.Message):
+        if (isinstance(message, email.message.Message) or
+            isinstance(message, email.message.EmailMessage):
             self._become_message(copy.deepcopy(message))
             if isinstance(message, Message):
                 message._explain_to(self)
         elif isinstance(message, bytes):
-            self._become_message(email.message_from_bytes(message))
+            self._become_message(
+                email.message_from_bytes(message, policy=email.policy.default))
         elif isinstance(message, str):
-            self._become_message(email.message_from_string(message))
+            self._become_message(
+                email.message_from_string(message, policy=email.policy.default))
         elif isinstance(message, io.TextIOWrapper):
-            self._become_message(email.message_from_file(message))
+            self._become_message(
+                email.message_from_file(message, policy=email.policy.default))
         elif hasattr(message, "read"):
-            self._become_message(email.message_from_binary_file(message))
+            self._become_message(
+                email.message_from_binary_file(message,
+                                               policy=email.policy.default))
         elif message is None:
-            email.message.Message.__init__(self)
+            email.message.EmailMessage.__init__(self)
         else:
             raise TypeError('Invalid message type: %s' % type(message))
 
