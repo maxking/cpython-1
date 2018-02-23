@@ -15,7 +15,7 @@ This module defines two classes, :class:`Mailbox` and :class:`Message`, for
 accessing and manipulating on-disk mailboxes and the messages they contain.
 :class:`Mailbox` offers a dictionary-like mapping from keys to messages.
 :class:`Message` extends the :mod:`email.message` module's
-:class:`~email.message.Message` class with format-specific state and behavior.
+:class:`~email.message.EmailMessage` class with format-specific state and behavior.
 Supported mailbox formats are Maildir, mbox, MH, Babyl, and MMDF.
 
 
@@ -85,7 +85,7 @@ Supported mailbox formats are Maildir, mbox, MH, Babyl, and MMDF.
       it.
 
       Parameter *message* may be a :class:`Message` instance, an
-      :class:`email.message.Message` instance, a string, a byte string, or a
+      :class:`email.message.EmailMessage` instance, a string, a byte string, or a
       file-like object (which should be open in binary mode). If *message* is
       an instance of the
       appropriate format-specific :class:`Message` subclass (e.g., if it's an
@@ -116,9 +116,9 @@ Supported mailbox formats are Maildir, mbox, MH, Babyl, and MMDF.
       :exc:`KeyError` exception if no message already corresponds to *key*.
 
       As with :meth:`add`, parameter *message* may be a :class:`Message`
-      instance, an :class:`email.message.Message` instance, a string, a byte
-      string, or a file-like object (which should be open in binary mode). If
-      *message* is an
+      instance, an :class:`email.message.Message` instance, a
+      :class:`email.message.EmailMessage` a string, a byte string, or a
+      file-like object (which should be open in binary mode). If *message* is an
       instance of the appropriate format-specific :class:`Message` subclass
       (e.g., if it's an :class:`mboxMessage` instance and this is an
       :class:`mbox` instance), its format-specific information is
@@ -192,7 +192,7 @@ Supported mailbox formats are Maildir, mbox, MH, Babyl, and MMDF.
 
       Return a string representation of the message corresponding to *key*, or
       raise a :exc:`KeyError` exception if no such message exists.  The
-      message is processed through :class:`email.message.Message` to
+      message is processed through :class:`email.message.EmailMessage` to
       convert it to a 7bit clean representation.
 
 
@@ -762,11 +762,11 @@ Supported mailbox formats are Maildir, mbox, MH, Babyl, and MMDF.
 .. class:: Message(message=None)
 
    A subclass of the :mod:`email.message` module's
-   :class:`~email.message.Message`. Subclasses of :class:`mailbox.Message` add
+   :class:`~email.message.EmailMessage`. Subclasses of :class:`mailbox.Message` add
    mailbox-format-specific state and behavior.
 
    If *message* is omitted, the new instance is created in a default, empty state.
-   If *message* is an :class:`email.message.Message` instance, its contents are
+   If *message* is an :class:`email.message.EmailMessage` instance, its contents are
    copied; furthermore, any format-specific information is converted insofar as
    possible if *message* is a :class:`Message` instance. If *message* is a string,
    a byte string,
@@ -1272,7 +1272,7 @@ When an :class:`MHMessage` instance is created based upon a
 
       Set the message's visible headers to be the same as the headers in
       *message*.  Parameter *visible* should be a :class:`Message` instance, an
-      :class:`email.message.Message` instance, a string, or a file-like object
+      :class:`email.message.EmailMessage` instance, a string, or a file-like object
       (which should be open in text mode).
 
 
