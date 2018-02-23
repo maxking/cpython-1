@@ -765,14 +765,14 @@ Supported mailbox formats are Maildir, mbox, MH, Babyl, and MMDF.
    :class:`~email.message.EmailMessage`. Subclasses of :class:`mailbox.Message` add
    mailbox-format-specific state and behavior.
 
-   If *message* is omitted, the new instance is created in a default, empty state.
-   If *message* is an :class:`email.message.EmailMessage` instance, its contents are
-   copied; furthermore, any format-specific information is converted insofar as
-   possible if *message* is a :class:`Message` instance. If *message* is a string,
-   a byte string,
-   or a file, it should contain an :rfc:`2822`\ -compliant message, which is read
-   and parsed.  Files should be open in binary mode, but text mode files
-   are accepted for backward compatibility.
+   If *message* is omitted, the new instance is created in a default, empty
+   state.  If *message* is an :class:`email.message.Message` instance or
+   :class:`email.message.EmailMessage`, its contents are copied; furthermore,
+   any format-specific information is converted insofar as possible if *message*
+   is a :class:`Message` instance. If *message* is a string, a byte string, or a
+   file, it should contain an :rfc:`2822`\ -compliant message, which is read and
+   parsed.  Files should be open in binary mode, but text mode files are
+   accepted for backward compatibility.
 
    The format-specific state and behaviors offered by subclasses vary, but in
    general it is only the properties that are not specific to a particular
