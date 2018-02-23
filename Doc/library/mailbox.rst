@@ -117,7 +117,7 @@ Supported mailbox formats are Maildir, mbox, MH, Babyl, and MMDF.
 
       As with :meth:`add`, parameter *message* may be a :class:`Message`
       instance, an :class:`email.message.Message` instance, a
-      :class:`email.message.EmailMessage` a string, a byte string, or a
+      :class:`email.message.EmailMessage`, a string, a byte string, or a
       file-like object (which should be open in binary mode). If *message* is an
       instance of the appropriate format-specific :class:`Message` subclass
       (e.g., if it's an :class:`mboxMessage` instance and this is an
