@@ -26,7 +26,6 @@ class TestBase:
         self.assertIsInstance(msg, email.message.EmailMessage)
         self.assertIsInstance(msg, mailbox.Message)
         for key, value in _sample_headers.items():
-            print("key: %s\nvalue: %s\nmessage value: %s" % (key, value, msg.get_all(key)))
             self.assertIn(value, msg.get_all(key))
         self.assertTrue(msg.is_multipart())
         self.assertEqual(len(msg.get_payload()), len(_sample_payloads))

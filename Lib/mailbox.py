@@ -1490,7 +1490,7 @@ class Message(email.message.EmailMessage):
     def __init__(self, message=None):
         """Initialize a Message instance."""
         if (isinstance(message, email.message.Message) or
-            isinstance(message, email.message.EmailMessage):
+            isinstance(message, email.message.EmailMessage)):
             self._become_message(copy.deepcopy(message))
             if isinstance(message, Message):
                 message._explain_to(self)
